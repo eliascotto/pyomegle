@@ -15,15 +15,15 @@ from pyomegle import OmegleBot, OmegleHandler
         exits chat session
 """
 
-h = OmegleHandler(loop=True)    # sessions loop
+h = OmegleHandler(loop=True)        # sessions loop
 c = OmegleBot(h, wpm=47, lang='en') # 47 words per minute
 c.start()
 
 while 1:
-    input_str = raw_input('') # string input
+    input_str = raw_input('')       # string input
 
     if input_str.strip() == '/next':
-        c.next()    # new conversation
+        c.next()                    # new conversation
     elif input_str.strip() == '/exit':
         c.disconnect()
         break
