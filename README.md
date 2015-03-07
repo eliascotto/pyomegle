@@ -25,6 +25,7 @@ while 1:
     if input_str.strip() == '/next':
         c.next()
     elif input_str.strip() == '/exit':
+        c.disconnect()
         break
     else:
         c.send(input_str)
