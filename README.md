@@ -15,7 +15,7 @@ from pyomegle import OmegleBot, OmegleHandler
         exits chat session
 """
 
-h = OmegleHandler(loop=True)        # sessions loop
+h = OmegleHandler(loop=True)        # session loop
 c = OmegleBot(h, wpm=47, lang='en') # 47 words per minute
 c.start()
 
