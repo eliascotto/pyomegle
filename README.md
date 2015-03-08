@@ -3,7 +3,10 @@ Python API for Omegle webchat.
 Inspired by [brianewing](https://github.com/brianewing/pyomegle)
 
 #Installation
-`$ pip install pyomegle`
+```sh
+$ pip install pyomegle
+```
+pyomegle depends on [mechanize](http://wwwsearch.sourceforge.net/mechanize/). For this reason Python 3 is not currently supported.
 
 # Usage
 ``` python

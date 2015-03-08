@@ -319,7 +319,7 @@ class OmegleClient(Omegle):
 
     def __init__(self, events_handler, wpm=42,
                 rcs=1, firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
-        super(OmegleBot, self).__init__(
+        super(OmegleClient, self).__init__(
             events_handler, rcs, firstevents, spid,
             random_id, topics, lang, event_delay)
         self.wpm = wpm
@@ -339,12 +339,12 @@ class OmegleClient(Omegle):
 
     def typing(self):
         """ Simulate you currently typing into the conversation """
-        super(OmegleBot, self).typing()
+        super(OmegleClient, self).typing()
         print ('You currently typing...')
 
     def send(self, message):
         """ Send a message """
-        super(OmegleBot, self).send(message)
+        super(OmegleClient, self).send(message)
         print ('You: %s' % message)
 
     def next(self):
