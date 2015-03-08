@@ -2,6 +2,9 @@
 Python API for Omegle webchat.
 Inspired by [brianewing](https://github.com/brianewing/pyomegle)
 
+#Installation
+`$ pip install pyomegle`
+
 # Usage
 ``` python
 from pyomegle import OmegleClient, OmegleHandler
