@@ -1,1 +1,1 @@
-from omegle import *
+from pyomegle import *
