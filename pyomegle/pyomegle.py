@@ -252,19 +252,19 @@ class OmegleHandler(object):
         self.loop = loop
     
     def _setup(self, omegle):
-        """ Called by the Omegle class so event handlers can use the Omegle instance """
+        """ Called by the Omegle class for initial additional settings """
         self.omegle = omegle
     
     def waiting(self):
-        """ Called when the server tells us we're waiting on a stranger to connect """
+        """ Called when we are waiting for a stranger to connect """
         print ('Looking for someone you can chat with...')
 
     def connected(self):
-        """ Called when the server reports we're connected with a stranger """
+        """ Called when we are connected with a stranger """
         print ('You\'re now chatting with a random stranger. Say hi!')
 
     def typing(self):
-        """ Called when the user typing a message """
+        """ Called when the user is typing a message """
         print ('Stranger is typing...')
 
     def stopped_typing(self):
@@ -276,11 +276,11 @@ class OmegleHandler(object):
         print ('Stranger: %s' % message)
 
     def common_likes(self, likes):
-        """ Called when you and stranger likes the same thing"""
+        """ Called when you and stranger likes the same thing """
         print ('You both like %s.' % ', '.join(likes))
     
     def disconnected(self):
-        """ Called when the stranger disconnects """
+        """ Called when a stranger disconnects """
         print ('Stranger has disconnected.')
 
         if self.loop:   # new session
@@ -311,7 +311,7 @@ class OmegleHandler(object):
         pass
 
     def ident_digest(self, digests):
-        """ Digest from server """
+        """ Identity digest received from server """
         pass
 
 
@@ -325,11 +325,11 @@ class OmegleClient(Omegle):
         self.wpm = wpm
 
     def _typingtime(self, msglen):
-        """ Calculate typing time in WPM """
+        """ Calculates typing time in WPM """
         return (self.wpm / 60) * (msglen / 5)
 
     def write(self, message):
-        """ Simulate a complete writing message """
+        """ Simulates a message completely written """
         msglen = len(message)
         typingtime = self._typingtime(msglen)
 
@@ -338,16 +338,16 @@ class OmegleClient(Omegle):
         self.send(message)
 
     def typing(self):
-        """ Simulate you currently typing into the conversation """
+        """ Emulates typing in the conversation """
         super(OmegleClient, self).typing()
         print ('You currently typing...')
 
     def send(self, message):
-        """ Send a message """
+        """ Sends a message """
         super(OmegleClient, self).send(message)
         print ('You: %s' % message)
 
     def next(self):
-        """ Start with a new conversation """
+        """ Starts with a new conversation """
         self.disconnect()
         self.start()
