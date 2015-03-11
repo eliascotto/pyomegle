@@ -89,3 +89,7 @@ List of client methods
 * **recaptcha(challenge, response)** Captcha validation
 * **next()** Starts with a new conversation
 * **disconnect()**  Disconnect from the current conversation
+
+License
+---------------------
+pyomegle is released under the [MIT License](LICENSE).
