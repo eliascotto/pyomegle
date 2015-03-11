@@ -80,7 +80,12 @@ Client
 
 List of client methods
 
-* **write(message)** Simulates a message completely written
+* **start()** Start a new conversation
+* **status()** Return connection status
+* **write(message)** Simulates a message completely written whit typing time
 * **typing()** Emulates typing in the conversation
+* **stopped_typing()** Emulates stopped typing into the conversation
 * **send(message)** Sends a message
+* **recaptcha(challenge, response)** Captcha validation
 * **next()** Starts with a new conversation
+* **disconnect()**  Disconnect from the current conversation
