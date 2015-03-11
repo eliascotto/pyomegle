@@ -1,7 +1,6 @@
 from __future__ import division
 import mechanize
 import threading
-import urllib2
 import urllib
 import random
 import time
@@ -33,14 +32,14 @@ class EventThread(threading.Thread):
         self.instance._handle_events(data['events'])
 
         while not self.instance.connected:
-            self.instance.event()
+            self.instance._events_manager()
             if self._stop.isSet():
                 self.instance.disconnect()
                 return
             time.sleep(self.instance.event_delay)
 
         while self.instance.connected:
-            self.instance.event()
+            self.instance._events_manager()
             if self._stop.isSet():
                 self.instance.disconnect()
                 return
@@ -150,6 +149,19 @@ class Omegle(object):
 
         return response
 
+    def _events_manager(self):
+        """ Event manager class """
+        url = self.EVENTS_URL % self.server
+        data = {'id': self.client_id}
+        try:
+            response = self._request(url, data)
+            data = json.load(response)
+        except Exception:
+            return False
+        if data:
+            self._handle_events(data)
+        return True
+
     def status(self):
         """ Return connection status """
         nocache = '%r' % random.random()
@@ -175,7 +187,7 @@ class Omegle(object):
         return thread
 
     def recaptcha(self, challenge, response):
-        """ Used for captcha request to user """
+        """ Captcha validation """
         url = self.RECAPTCHA_URL % self.server
         data = {'id': self.client_id, 'challenge':
                 challenge, 'response': response}
@@ -185,21 +197,8 @@ class Omegle(object):
         except Exception:
             return False
 
-    def event(self):
-        """ Event manager class """
-        url = self.EVENTS_URL % self.server
-        data = {'id': self.client_id}
-        try:
-            response = self._request(url, data)
-            data = json.load(response)
-        except Exception:
-            return False
-        if data:
-            self._handle_events(data)
-        return True
-
     def typing(self):
-        """ Simulate you currently typing into the conversation """
+        """ Emulates typing in the conversation """
         url = self.TYPING_URL % self.server
         data = {'id': self.client_id}
         try:
@@ -209,7 +208,7 @@ class Omegle(object):
             return False
 
     def stopped_typing(self):
-        """ Simulate you stopped typing into the conversation """
+        """ Emulates stopped typing into the conversation """
         url = self.STOPPED_TYPING_URL % self.server
         data = {'id': self.client_id}
         try:
