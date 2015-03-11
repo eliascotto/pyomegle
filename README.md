@@ -70,7 +70,7 @@ class MyCustomHandler(OmegleHandler):
 
 Client
 ----------
-``OmegleClient`` uses some optional initial parameters, the most useful
+``OmegleClient`` uses some optional initial parameters, the most useful are
 
 * **lang='en'** for set a default chat language
 * **wpm=42** set the ``words per minutes`` typing speed
