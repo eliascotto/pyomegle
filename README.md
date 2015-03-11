@@ -8,7 +8,7 @@ Installation
 ```sh
 $ pip install pyomegle
 ```
-pyomegle depends on [mechanize](http://wwwsearch.sourceforge.net/mechanize/). For this reason Python 3 is not currently supported.
+pyomegle depends on [mechanize](http://wwwsearch.sourceforge.net/mechanize/). For this reason Python 3 is currently not supported.
 
 Usage
 ==================
@@ -42,7 +42,7 @@ while 1:
 
 Events
 ----------
-List of events accessible by ``OmegleHandler``. Note that ``OmegleHandler`` uses a ``loop`` optional initial parameter, valid for reconnect with a new stranger when ``disconnected()`` event is called from the server.
+List of events accessible by ``OmegleHandler``. Note that ``OmegleHandler`` uses a ``loop`` optional parameter, valid for start a new chat when a stranger disconnects.
 
 * **waiting()** Called when we are waiting for a stranger to connect
 * **connected()**  Called when we are connected with a stranger
