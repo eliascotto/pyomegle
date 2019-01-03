@@ -19,13 +19,13 @@ class EventThread(threading.Thread):
     def run(self):
         try:    
             response = self.instance.browser.open(self.start_url)
-        except Exception, ex:
+        except Exception as ex:
             print (str(ex))
             return
 
         try:
             data = json.load(response)
-        except ValueError, ex:
+        except ValueError as ex:
             print (str(ex))
 
         self.instance.client_id = data['clientID']
