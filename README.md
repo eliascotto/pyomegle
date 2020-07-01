@@ -8,7 +8,6 @@ Installation
 ```sh
 $ pip install pyomegle
 ```
-pyomegle depends on [mechanize](http://wwwsearch.sourceforge.net/mechanize/). For this reason Python 3 is currently not supported.
 
 Usage
 ==================

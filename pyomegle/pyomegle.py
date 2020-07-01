@@ -143,7 +143,7 @@ class Omegle(object):
             assert 'URL not valid for request'
 
         if data:
-            data = urllib.urlencode(data)
+            data = urllib.parse.urlencode(data)
 
         response = self.browser.open(url, data)
 
@@ -178,7 +178,7 @@ class Omegle(object):
                                 self.spid, self.random_id, self.lang)
         if self.topics:
             # Add custom topic to the url
-            url += '&' + urllib.urlencode({'topics': json.dumps(self.topics)})
+            url += '&' + urllib.parse.urlencode({'topics': json.dumps(self.topics)})
 
         thread = EventThread(self, url)
         thread.start()
