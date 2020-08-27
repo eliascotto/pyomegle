@@ -325,7 +325,7 @@ class OmegleClient(Omegle):
 
     def _typingtime(self, msglen):
         """ Calculates typing time in WPM """
-        return (self.wpm / 60) * (msglen / 5)
+        return (60 / self.wpm) * (msglen / 5)
 
     def write(self, message):
         """ Simulates a message completely written """
