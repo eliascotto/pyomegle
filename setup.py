@@ -4,7 +4,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='pyomegle',
-      version='1.05',
+      version='1.06',
       description='Python API for Omegle webchat',
       long_description='Python API for Omegle webchat. \
                         Usage: https://github.com/elias94/pyomegle',

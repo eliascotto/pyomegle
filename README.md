@@ -8,7 +8,6 @@ Installation
 ```sh
 $ pip install pyomegle
 ```
-pyomegle depends on [mechanize](http://wwwsearch.sourceforge.net/mechanize/). For this reason Python 3 is currently not supported.
 
 Usage
 ==================
@@ -29,7 +28,7 @@ c = OmegleClient(h, wpm=47, lang='en')  # 47 words per minute
 c.start()
 
 while 1:
-    input_str = raw_input('')           # string input
+    input_str = input('')           # string input
 
     if input_str.strip() == '/next':
         c.next()                        # new conversation
