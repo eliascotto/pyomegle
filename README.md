@@ -1,7 +1,6 @@
 Pyomegle
 ==================
-Python API for Omegle webchat.
-Inspired by [brianewing](https://github.com/brianewing/pyomegle).
+Python API for Omegle webchat. Compatible with Python3.
 
 Installation
 ==================
