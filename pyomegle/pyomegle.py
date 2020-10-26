@@ -56,7 +56,7 @@ class Omegle(object):
         'front7.omegle.com', 'front8.omegle.com', 'front9.omegle.com']
 
     STATUS_URL =            'http://%s/status?nocache=%s&randid=%s'
-    START_URL =             'http://%s/start?rcs=%s&firstevents=%s&spid=%s&randid=%s&lang=%s'
+    START_URL =             'http://%s/start?rcs=%s&caps=recaptcha2&firstevents=%s&spid=%s&randid=%s&lang=%s'
     RECAPTCHA_URL =         'http://%s/recaptcha'
     EVENTS_URL =            'http://%s/events'
     TYPING_URL =            'http://%s/typing'
