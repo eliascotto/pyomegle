@@ -28,8 +28,13 @@ class EventThread(threading.Thread):
         except ValueError as ex:
             print (str(ex))
 
-        self.instance.client_id = data['clientID']
-        self.instance._handle_events(data['events'])
+        try:
+            self.instance.client_id = data['clientID']
+            self.instance._handle_events(data['events'])
+        except KeyError:
+            if not len(response.read()):
+                print("(Blank server response) Error connecting to server. Please try again.")
+                print("If problem persists then your IP may be soft banned, try using a VPN.")
 
         while not self.instance.connected:
             self.instance._events_manager()
@@ -50,13 +55,10 @@ class EventThread(threading.Thread):
 
 
 class Omegle(object):
-    SERVER_LIST = [
-        'front1.omegle.com', 'front2.omegle.com', 'front3.omegle.com',
-        'front4.omegle.com', 'front5.omegle.com', 'front6.omegle.com',
-        'front7.omegle.com', 'front8.omegle.com', 'front9.omegle.com']
+    SERVER_LIST = [f'front{n}.omegle.com' for n in range(1, 33)]
 
     STATUS_URL =            'http://%s/status?nocache=%s&randid=%s'
-    START_URL =             'http://%s/start?rcs=%s&firstevents=%s&spid=%s&randid=%s&lang=%s'
+    START_URL =             'http://%s/start?caps=recaptcha2&firstevents=%s&spid=%s&randid=%s&lang=%s'
     RECAPTCHA_URL =         'http://%s/recaptcha'
     EVENTS_URL =            'http://%s/events'
     TYPING_URL =            'http://%s/typing'
@@ -64,15 +66,14 @@ class Omegle(object):
     DISCONNECT_URL =        'http://%s/disconnect'
     SEND_URL =              'http://%s/send'
 
-    def __init__(self, events_handler, rcs=1, firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
+    def __init__(self, events_handler, firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
         self.events_handler = events_handler
-        self.rcs = rcs
         self.firstevents = firstevents
         self.spid = spid
         self.topics = topics
         self.lang = lang
         self.event_delay = event_delay
-        self.random_id = random_id or self._randID(9)
+        self.random_id = random_id or self._randID(8)
 
         self.connected = False
 
@@ -87,7 +88,7 @@ class Omegle(object):
 
     def _randID(self, length):
         """ Generates a random ID for chat session """
-        return ''.join([random.choice('0123456789ABCDEFGHJKLMNPQRSTUVWXYZ')
+        return ''.join([random.choice('23456789ABCDEFGHJKLMNPQRSTUVWXYZ')
                         for _ in range(length)])
 
     def _handle_events(self, events):
@@ -174,7 +175,7 @@ class Omegle(object):
 
     def start(self):
         """ Start a new conversation """
-        url = self.START_URL % (self.server, self.rcs, self.firstevents,
+        url = self.START_URL % (self.server, self.firstevents,
                                 self.spid, self.random_id, self.lang)
         if self.topics:
             # Add custom topic to the url
@@ -317,9 +318,9 @@ class OmegleHandler(object):
 class OmegleClient(Omegle):
 
     def __init__(self, events_handler, wpm=42,
-                rcs=1, firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
+                firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
         super(OmegleClient, self).__init__(
-            events_handler, rcs, firstevents, spid,
+            events_handler, firstevents, spid,
             random_id, topics, lang, event_delay)
         self.wpm = wpm
 
