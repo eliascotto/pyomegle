@@ -288,10 +288,10 @@ class OmegleHandler(object):
     
     def captcha_required(self):
         """ Called when the server asks for captcha """
-        url = RECAPTCHA_CHALLENGE_URL % challenge
+        url = self.RECAPTCHA_CHALLENGE_URL % challenge
         source = self.browser.open(url).read()
         challenge = recaptcha_challenge_regex.search(source).groups()[0]
-        url = RECAPTCHA_IMAGE_URL % challenge
+        url = self.RECAPTCHA_IMAGE_URL % challenge
 
         print ('Recaptcha required: %s' % url)
         response = raw_input('Response: ')
