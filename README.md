@@ -70,7 +70,7 @@ Client
 ----------
 ``OmegleClient`` uses some optional initial parameters, the most useful are
 
-* **lang='en'** set a default chat language
+* **lang='en'** set the default chat language
 * **wpm=42** set the ``words per minutes`` typing speed
 * **topics=[]** list of interests
 * **event_delay=3** server polling delay in seconds
