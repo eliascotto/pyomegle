@@ -14,7 +14,7 @@ Usage
 from pyomegle import OmegleClient, OmegleHandler
 
 """
-    Omegle inteface for python
+    Omegle interface for python
 
     /next
         starts a new conversation
@@ -70,7 +70,7 @@ Client
 ----------
 ``OmegleClient`` uses some optional initial parameters, the most useful are
 
-* **lang='en'** for set a default chat language
+* **lang='en'** set the default chat language
 * **wpm=42** set the ``words per minutes`` typing speed
 * **topics=[]** list of interests
 * **event_delay=3** server polling delay in seconds
@@ -80,7 +80,7 @@ List of client methods
 
 * **start()** Start a new conversation
 * **status()** Return connection status
-* **write(message)** Simulates a message completely written whit typing time
+* **write(message)** Simulates a message completely written with typing time
 * **typing()** Emulates typing in the conversation
 * **stopped_typing()** Emulates stopped typing into the conversation
 * **send(message)** Sends a message
