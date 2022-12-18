@@ -58,7 +58,7 @@ class Omegle(object):
     SERVER_LIST = [f'front{n}.omegle.com' for n in range(1, 33)]
 
     STATUS_URL =            'http://%s/status?nocache=%s&randid=%s'
-    START_URL =             'http://%s/start?caps=recaptcha2,t&firstevents=%s&spid=%s&randid=%s&lang=%s'
+    START_URL =             'http://%s/start?caps=recaptcha2,t2&firstevents=%s&spid=%s&randid=%s&lang=%s'
     RECAPTCHA_URL =         'http://%s/recaptcha'
     EVENTS_URL =            'http://%s/events'
     TYPING_URL =            'http://%s/typing'
