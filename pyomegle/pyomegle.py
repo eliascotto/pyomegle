@@ -58,13 +58,15 @@ class Omegle(object):
     SERVER_LIST = [f'front{n}.omegle.com' for n in range(1, 33)]
 
     STATUS_URL =            'http://%s/status?nocache=%s&randid=%s'
-    START_URL =             'http://%s/start?caps=recaptcha2,t2&firstevents=%s&spid=%s&randid=%s&lang=%s'
+    START_URL =             'http://%s/start?caps=recaptcha2,t3&firstevents=%s&spid=%s&randid=%s&cc=%s&lang=%s'
     RECAPTCHA_URL =         'http://%s/recaptcha'
     EVENTS_URL =            'http://%s/events'
     TYPING_URL =            'http://%s/typing'
     STOPPED_TYPING_URL =    'http://%s/stoppedtyping'
     DISCONNECT_URL =        'http://%s/disconnect'
     SEND_URL =              'http://%s/send'
+
+    CHECK_URL = [f'http://waw{n}.omegle.com/check' for n in range(1, 4)]
 
     def __init__(self, events_handler, firstevents=1, spid='', random_id=None, topics=[], lang='en', event_delay=3):
         self.events_handler = events_handler
@@ -83,8 +85,19 @@ class Omegle(object):
         self.browser = mechanize.Browser()
         self.browser.addheaders = []
 
+        self.check_id = self._checkID()
+
         # Call additional setup
         self.events_handler._setup(self)
+
+    def _checkID(self):
+        """ Retrive check ID for verification """
+        url = random.choice(self.CHECK_URL)
+
+        response = self._request(url, '')
+        data = response.get_data().decode('UTF-8')
+
+        return data
 
     def _randID(self, length):
         """ Generates a random ID for chat session """
@@ -176,7 +189,8 @@ class Omegle(object):
     def start(self):
         """ Start a new conversation """
         url = self.START_URL % (self.server, self.firstevents,
-                                self.spid, self.random_id, self.lang)
+                                self.spid, self.random_id, self.check_id, self.lang)
+
         if self.topics:
             # Add custom topic to the url
             url += '&' + urllib.parse.urlencode({'topics': json.dumps(self.topics)})
